@@ -1,0 +1,63 @@
+/* .formBody{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 95vh;
+}
+
+.formCard{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}
+
+.formCard h1{
+    margin: 20px;
+}
+
+.formCard label{
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+}
+
+.formCard input{
+    height: 40px;   
+}
+
+.formCard button{
+    height: 40px;
+    cursor: pointer;
+}
+
+.formCard button:active{
+    background-color: lightblue;
+    color: #fff;
+} */
+
+.main{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+    max-width: 500vw;
+}
+
+.main input{
+    width: 500px;
+    height: 40px;
+}
+
+.button{
+    margin-top: 5px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.button:active{
+    background-color: lightblue;
+    color: #fff;
+} 

@@ -1,95 +1,64 @@
+"use client"
 import Image from 'next/image'
 import styles from './page.module.css'
+//import cardImage from '../public/creditCard.jpg'
+import {useRouter} from 'next/navigation'
 
-export default function Home() {
+
+export default function home() {
+  const router = useRouter();
+  const handlePaymentRoute = () => {
+   router.push('/pageForm');
+  }
+  const handleTransferRoute = () => {
+   router.push('/transferForm');
+  }
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div className={styles.body}>
+        <div className={styles.header}>
+          <div className={styles.headerTitle}>
+            <h2>Pay - Go</h2>
+          </div>
+
+          <div className={styles.mainMenu}>
+            <ul className={styles.menu}>
+              <li className={styles.menuItem}>
+                <p>Home</p>
+              </li>
+              <li className={styles.menuItem}>
+                <p>Services</p>
+              </li>
+              <li className={styles.menuItem}>
+                <p>Checkout</p>
+              </li>
+              <li className={styles.menuItem}>
+                <p>Contact Us</p>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div className={styles.mainBody}>
+          <div className={styles.contentOne}>
+            <h1>
+              Make Payments
+            </h1>
+            <p>
+              Discover a New Era of Payments with Pay-Go! Experience effortless transactions through our intuitive interface, backed by state-of-the-art security protocols that keep your financial information safe. Enjoy instant processing, tailored solutions for your business, and the ability to connect with customers worldwide. Our round-the-clock support is here for you. Embrace the future of seamless and secure payments – join Pay-Go today!
+            </p>
+            <div className={styles.button}>
+              <button onClick={handlePaymentRoute}>Click to Pay</button>
+              <button onClick={handleTransferRoute}>Make Transfer</button>
+            </div>
+          </div>
+          <div className={styles.contentTwo}>
+            <Image src='/images/creditCard.jpg' alt="payment image" loading="lazy" width={700} height={500} />
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      
+    </>
   )
 }

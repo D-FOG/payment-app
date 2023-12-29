@@ -1,6 +1,6 @@
 import './globals.css'
+import Script from 'next/script'
 import { Inter } from 'next/font/google'
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -11,6 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"/>
       <body className={inter.className}>{children}</body>
     </html>
   )
