@@ -8,6 +8,10 @@ const Home = () => {
   const [amount, setAmount] = useState('');
   const [clientToken, setClientToken] = useState('')
   const [recipientEmail, setRecipientEmail] = useState('');
+  const [transferId, setTransferId] = useState('');
+  const [visible, setVisible] = useState(false)
+  const [refundMessage, setRefundMessage] = useState('')
+  const [transactionId, setTransactionId] = useState('')
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
@@ -45,7 +49,9 @@ const Home = () => {
       });
 
       if (response.ok) {
+        const data =  await response.json();
         console.log('Transfer successful!');
+        setTransferId(data.transactionId);
         // Handle success, update UI, etc.
       } else {
         console.error('Transfer failed. Please check your information and try again.');
@@ -97,6 +103,36 @@ const Home = () => {
     });
   };
 
+  const handleVisibleState = () => {
+    setVisible(true);
+  }
+
+  const handleIdChange = (e) => {
+    const value = e.target.value;
+    setTransactionId(value);
+  }
+
+  const handleRefund = async () => {
+    try{
+      const response = await fetch('/api/braintreeConfig/paymentRefund', {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({transactionId,amount})
+      })
+
+      if (response.ok){
+        const data = await response.json();
+        console.log('Transaction ID sent to the server successfully')
+        setRefundMessage(data.refundId)
+      } else {
+        console.error('There was an error sending the transsaction ID to the server')
+      }
+    } catch (error) {
+      console.error(`Some form of error occured: ${error}`)
+    }
+  }
 
   return (
     <div className={styles.main}>
@@ -116,9 +152,28 @@ const Home = () => {
                 <input type="email" value={recipientEmail} placeholder="Enter recipient's email" onChange={handleEmailChange} />
            </div>
         </div>
-       
         <button onClick={tokenizePaymentInfo}>Initiate Transfer</button>
       </div>
+      {transferId && <div>Transfer Succefull!! TransactionID: {transferId}</div>}
+      <button className={styles.button} onClick={handleVisibleState}>Make Refund</button>
+      { visible &&
+        <div className={styles.visibleForm}>
+          <div>
+            <h3>
+                Transaction ID:
+            </h3>
+            <input type="text" value={transactionId} placeholder="Transction ID" onChange={handleIdChange} />
+            <div className={styles.amount}>
+                <h3>
+                    Amount:
+                </h3>
+                <input type="number" value={amount} placeholder="$0.00" onChange={handleAmountChange} />
+            </div>
+          </div>
+          <button onClick={handleRefund}>Initiate Refund</button>
+        </div>
+      }
+      {refundMessage && <div> Refund Successful!! RefundID: {refundMessage}</div>}
     </div>
   );
 };

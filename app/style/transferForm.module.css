@@ -38,3 +38,41 @@
     background-color: lightblue;
     color: #fff;
 } 
+.button{
+    margin-top: 5px;
+    height: 40px;
+    cursor: pointer;
+    margin-left:10px;
+    background-color: lightgreen;
+    
+}
+
+.button:active{
+    background-color: lightblue;
+    color: #fff;
+} 
+
+.visibleForm{
+    margin-top: 20px;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.visibleForm input{
+    width: 400px;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.visibleForm button{
+    margin-top: 5px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.visibleForm button:active{
+    background-color: lightblue;
+    color: #fff;
+} 
