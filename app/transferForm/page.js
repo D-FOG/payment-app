@@ -12,6 +12,7 @@ const Home = () => {
   const [visible, setVisible] = useState(false)
   const [refundMessage, setRefundMessage] = useState('')
   const [transactionId, setTransactionId] = useState('')
+  const [responseMessage, setResponseMessage] = useState('');
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
@@ -121,13 +122,17 @@ const Home = () => {
         },
         body: JSON.stringify({transactionId,amount})
       })
-
+    
       if (response.ok){
         const data = await response.json();
         console.log('Transaction ID sent to the server successfully')
         setRefundMessage(data.refundId)
+        console.log(data.refundId)
+        setResponseMessage('Refund Successful!! Refund ID:')
       } else {
-        console.error('There was an error sending the transsaction ID to the server')
+        const data = await response.json();
+        console.error('There was an error sending the transsaction ID to the server', data.error)
+        setResponseMessage(data.error || 'Refund failed');
       }
     } catch (error) {
       console.error(`Some form of error occured: ${error}`)
@@ -173,7 +178,7 @@ const Home = () => {
           <button onClick={handleRefund}>Initiate Refund</button>
         </div>
       }
-      {refundMessage && <div> Refund Successful!! RefundID: {refundMessage}</div>}
+      {responseMessage && <div>{responseMessage} {refundMessage}</div>}
     </div>
   );
 };

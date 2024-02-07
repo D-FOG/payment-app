@@ -26,10 +26,16 @@ export default async function handler(req, res) {
     } else {
       console.error('Refund failed:', result.message);
       // Handle failure, send error response, etc.
-      res.status(500).json({ success: false, error: result.message });
+      res.status(400).json({ success: false, error: result.message });
     }
   } catch (error) {
     console.error('Error processing refund:', error);
-    res.status(500).json({ success: false, error: 'Internal server error' });
+    if (error.type === 'notFoundError') {
+      // Handle specific notFoundError
+      res.status(404).json({ success: false, error: 'Transaction ID not found' });
+    } else {
+      // Handle other errors
+      res.status(500).json({ success: false, error: 'Internal server error' });
+    }
   }
 }
